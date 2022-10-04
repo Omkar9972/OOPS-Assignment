@@ -1,0 +1,209 @@
+1.Write a standard JS function which takes a number as an argument and returns its factorial.
+function factori(x) {
+    let res = 1;
+    for (let i = x; i > 1; i--) {
+        res = res * i;
+
+    }
+    return res;
+}
+
+let y= factori(parseInt(prompt('Enter a Number >>>')));
+// let y = parseInt(prompt(factori('input a number')));
+console.log(y);
+
+2.Write a JS arrow function which takes 2 numbers and returns their sum.
+
+
+// let sumoftwono = (no1, no2) => {
+
+//     const sum = no1 + no2;
+// }
+const no1 = parseInt(prompt('Enter a first Number >>>'));
+const no2 = parseInt(prompt('Enter a second Number >>>'));
+const sum = no1 + no2;
+
+console.log(sum);
+
+3.Write a standard JS function which takes variable number of arguments and prints each argument on the screen and also the number of arguments passed.
+
+function number(){
+    let number=0;
+    console.log("The number of arguments are passed:" +arguments.length);
+    for(let i=0;i<=arguments.length-1;i++)
+    {
+        console.log(arguments[i])
+
+    }
+    return number;
+
+}
+number(2,3,4);
+
+4.Write a JS arrow function named Login() which takes a username and password. In case any of the arguments or both are not passed, the default values must be CT and CT respectively.
+const login=(userName='CT',passWord='CT')=>
+{
+    console.log(`Username is: ${userName}`);
+    console.log(`Password is: ${passWord}`);
+}
+login();
+
+5.Create a JS object which stores the following details about a vehicle:
+vehicleid        à        a number
+
+brand            à        a string
+
+model            à        a string
+
+variant          à        a string
+
+specifications            à an object containing the following members:
+
+                                    firstGear         à a function which logs some message
+
+                                    secondGear    à a function which logs some message
+
+                                    maxSpeed      à a number
+
+                                    changeGear   à a function which calls “firstGear” and
+
+    “secondGear” functions
+
+Print the vehicleid, brand, model, variant on the browser console. Invoke the changeGear function & display the speed on the browser console.
+code:
+const specs={
+    firstgear:function(){
+        return `This is a first gear!`
+    },
+    secondgear:function(){
+        return `This is a second gear!`
+    },
+    maxSpeed:125,
+    changegear:function(){
+        return `1st Gear: ${this.firstgear()},2nd Gear:${this.secondgear()}`
+    }
+};
+vehicle={
+    vehicleId:1813076,
+    brand:`royal-enfield`,
+    model:'Himalayan',
+    variant:`ios16`,
+    specifications:specs
+}
+console.log(`the vehicleId is ${vehicle.vehicleId}`);
+console.log(`the brand is ${vehicle.brand}`);
+console.log(`the model is ${vehicle.model}`);
+console.log(`the vehicleId is ${vehicle.variant}`);
+let gearChange=vehicle.specifications.changegear()
+console.log(gearChange);
+console.log(`The maximum speed is:${vehicle.specifications.maxSpeed}`);
+
+6.Rewrite the function created in assignment 1 as an arrow function.
+
+{
+
+    let x = 10;
+
+    {
+
+            console.log(++x);
+
+            let x = 20;
+
+    }
+
+    console.log(x++);
+
+    {
+
+            let x = ++x;
+
+            console.log(x);
+
+    }
+
+    console.log(x++);
+
+}
+
+7.Pass the object created in assignment 5 to an arrow function. The function must return a string which contains the vehicleid, brand, ,model, variant & speed.
+
+let arrowVehicle = argument =>{
+    console.log("vehicle ID-"+ argument.vehicleid);
+    console.log("brand_name-"+ argument.brand);
+    console.log("model_name-"+argument.model);
+    console.log("variant-"+argument.variant);
+    console.log(argument.maxSpeed())
+
+}
+
+const vehicle= {
+    vehicleid : 101,
+    brand : 'toyota',
+    model : 'innova',
+    variant : '2.5 E (Diesel) PS 7',
+
+    firstGear : function(){
+
+        console.log('change to first gear');
+    },
+
+    secondGear : function(){
+
+        console.log('change to second second gear');
+    },
+
+    maxSpeed : function(){
+
+      let carSpeed = prompt("enter your current speed");
+      return `you are driving at ${carSpeed} kmph`
+    },
+
+    changeGear : function(speed){
+        if(speed>20){
+            console.log(this.secondGear())
+        }
+        else {
+            console.log(this.firstGear())
+        }
+    }
+
+}
+
+arrowVehicle(vehicle);
+
+8.Write a JS function which returns the sum of any number of arguments passed. If no arguments are passed, the function must return a zero.
+function sumOfNumbers(num){
+ 
+    let sum = 0;
+
+        for (const value of num) {
+            console.log(value)
+            sum=sum+ Number(value);
+            // console.log(sum)
+        }
+        console.log("sum = " +sum);
+}
+
+let numbers = [];
+ size = prompt("how much number you want to add")
+ 
+
+ for (let index = 0 ; index <size ; index++){
+    numbers[index] = prompt('enter the numbers');
+ }
+
+if((size || numbers)===""){
+    console.log(0)
+}
+else{
+sumOfNumbers(numbers)
+}
+ 
+9.Write a JS function which takes 3 arguments, namely arg1, arg2 and arg3. Call the function by passing an array of 3 elements to it. The function must return the maximum value from the array passed to it.
+function arrayOfArguments (arg1, arg2 , arg3){
+    return `largest is ${Math.max(arg1,arg2,arg3)}`
+}
+
+let arr = [5,10,8];
+console.log(arrayOfArguments(...arr));
