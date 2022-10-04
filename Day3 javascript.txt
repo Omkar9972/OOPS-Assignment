@@ -1,0 +1,173 @@
+1.Create an HTML page containing two textboxes for inputting the username & password respectively. Add a button titled Sign In. On the button click, invoke a JS function which checks if the username and password are citiustech (case insensitive match) and if so, redirects them to www.google.com
+Google
+Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.
+www.google.com
+ in a new window without a menu bar and address bar. If the username and/or password is not citiustech, then an error message in dark red color must be displayed beneath the appropriate textbox displaying a suitable error message. 
+
+//JS file
+document.getElementById("submitButton").addEventListener('click',function(){
+   let userName = document.getElementById("idTextBox").value;
+    let password = document.getElementById("passwordTextBox").value;
+
+    if (userName.toUpperCase()  == 'CITIUSTECH' && password.toUpperCase()  == 'CITIUSTECH'){
+        window.open("https://www.google.com/")
+    }
+    else if (userName == 'citiustech'){
+        document.getElementById("span2").textContent = "invalid password"
+    }
+    else{
+        document.getElementById("span1").textContent = "invalid ID"
+    }
+})
+
+2.Refactor the previous assignment to include the following: 
+
+a.When the user presses the tab key in each textbox, perform the check as mentioned above. 
+
+b.Write JS code to validate each key inputted in each textbox and display an error message beneath each textbox if a space character is detected in username or password. 
+
+c.As long as the username and password textboxes are empty, disable the button. The button must be enabled only when both textboxes contain text. 
+
+//Js file
+document.addEventListener('keydown', function(event)
+{
+  var code = event.keyCode || event.which;
+  if (code === 9) {  
+
+    let userName = document.getElementById("idTextBox").value;
+    let password = document.getElementById("passwordTextBox").value;
+
+    if (userName.toUpperCase() != 'CITIUSTECH' && userName !=''){
+                 document.getElementById("span1").textContent = "invalid id"
+                 document.getElementById('span2').style.display = 'none'
+             }
+    else if(password.toUpperCase() != 'CITIUSTECH' &&  password != ''){
+                 document.getElementById("span2").textContent = "invalid password"
+                 document.getElementById('span1').style.display = 'none'
+        }
+  }
+
+  if(document.getElementById("idTextBox").value != "" &&
+      document.getElementById("passwordTextBox").value != "" ){
+        document.getElementById("submitButton").style.display = 'inline'
+    }
+
+    else{
+        document.getElementById("submitButton").style.display = 'none'
+    }
+
+});
+
+document.addEventListener('keydown',function(space){
+
+    var blankSpace = space.keyCode || event.which;
+    if (blankSpace === 32){
+        alert("cannot have space")
+    }
+})
+  
+document.getElementById("submitButton").addEventListener('click',function(){
+    let userName = document.getElementById("idTextBox").value;
+     let password = document.getElementById("passwordTextBox").value;
+ 
+     if (userName.toUpperCase()  == 'CITIUSTECH' && password.toUpperCase()  == 'CITIUSTECH'){
+         window.open("https://www.google.com/")
+     }
+     else if (userName == 'citiustech'){
+         document.getElementById("span2").textContent = "invalid password"
+     }
+     else{
+         document.getElementById("span1").textContent = "invalid id"
+     }
+ })
+
+3.Create an HTML5 page which contains a textbox. The user will enter an email id in the textbox. Next to the textbox, put a button titled Add Another Email. When the button is clicked, write JS code to add another textbox and a button next to it titled Remove Email. When the button is clicked, the button and the textbox should be removed. 
+//Js file
+document.getElementById('em').addEventListener('click',function()
+
+ {
+    let container = document.getElementById('divide');
+    let search =   document.createElement('input');
+    let rembtn = document.createElement('input');
+
+    rembtn.setAttribute('type', 'button');
+    rembtn.setAttribute('id', 'btn1');
+    rembtn.value = 'Remove';
+
+    container.appendChild(search);
+    container.appendChild(rembtn);
+
+    document.getElementById('btn1').addEventListener('click',function(){
+        container.removeChild(search);
+        container.removeChild(rembtn);
+
+    })
+
+}
+
+)
+4.Create an HTML5 page which displays a dropdown list. The drop down list must contain the following data: 
+
+India 
+
+Australia 
+
+New Zealand 
+
+England 
+
+When the user selects a country name, write JS code to display the list of cities in another dropdown list. 
+
+//Js file
+
+var countryIndia = document.getElementById("indiaCountry");
+var countryAustralia = document.getElementById("australiaCountry");
+var countryNewzealand = document.getElementById("newzealandCountry");
+var countryEngland = document.getElementById("englandCountry");
+
+
+document.getElementById("myCountryName").addEventListener("click",function(){
+    let countryName = document.querySelector("#myCountryName").value;
+    
+
+    if(countryName == "India"){
+        countryIndia.style.display = "block";
+        countryEngland.style.display = "none";
+        countryNewzealand.style.display = "none";
+        countryEngland.style.display = "none";
+    }
+    else if(countryName == "Australia"){
+        countryAustralia.style.display = "block";
+        countryIndia.style.display = "none";
+        countryEngland.style.display = "none";
+        countryNewzealand.style.display = "none";
+    }
+    else if(countryName == "NewZealand"){
+        countryNewzealand.style.display = "block";
+        countryIndia.style.display = "none";
+        countryAustralia.style.display = "none";
+        countryEngland.style.display = "none";
+    }
+    else if(countryName == "England"){
+        
+        countryEngland.style.display = "block";
+        countryIndia.style.display = "none";
+        countryNewzealand.style.display = "none";
+        countryAustralia.style.display = "none";
+
+     }
+    
+   
+})
+
+5.Create an HTML5 page which displays an image with the size 200x200 pixels. When the mouse is hovered on the image, the image must zoom to 800x800 pixels. When the mouse is moved out of the image, the image must zoom out to 200x200 pixels. 
+//Js file
+document.getElementById("hack").addEventListener("mouseover",function(){
+    document.getElementById("hack").style.height="800px"; 
+    document.getElementById("hack").style.width="800px";    
+});
+
+document.getElementById("hack").addEventListener("mouseout",function(){
+    document.getElementById("hack").style.height="200px"; 
+    document.getElementById("hack").style.width="200px";    
+});
