@@ -1,0 +1,285 @@
+1.Create a JSON file with some sample data & save it on your local drive. Using XmlHttpRequest, display information from the file in a table format. 
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    function loadfile() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("get", "Question1.json", true);
+      xhttp.send();
+      xhttp.onreadystatechange = function () {
+        var tbody = document.getElementById("demo").querySelector("tbody");
+        tbody.innerHTML = "";
+        if (this.readyState == 4 && this.status == 200) {
+
+          JSON.parse(this.responseText).forEach(function (data, index) {
+            tbody.innerHTML += "<tr><td>" + data.id + "</td><td>" + data.name + "</td><td>" + data.price + "</td></tr>";
+          });
+        }
+      };
+
+
+    }
+  </script>
+  <style>
+    table,
+    td,
+    tr {
+      border: 2px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="loadfile()">loadData</button>
+  <table id="demo">
+    <thead>
+      <tr>
+        <td> Id</td>
+        <td>Name</td>
+        <td>Price</td>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+</body>
+
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.Have a look at the following URL. It contains some sample REST APIs: 
+
+https://jsonplaceholder.typicode.com/ 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Method</title>
+</head>
+
+<body>
+    <label for="site-search">Enter a user ID:</label>
+    <input type="search" id="searchId" name="q" />
+    <br /><br />
+    <button onclick="getD()">Get Details</button>
+    <br /><br />
+    <div id="d"></div>
+    <script>
+        function getD() {
+            let uname = document.getElementById("searchId").value;
+            data = fetch("https://jsonplaceholder.typicode.com/users/" + uname)
+            .then((response)=>response.json())
+            .then((json)=>{
+                document.getElementById("d").innerHTML=JSON.stringify(json);
+
+            });
+        }
+    </script>
+</body>
+
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Create an HTML5 page containing a textbox and a button titled Get Details. The user will enter a user id in the textbox. On the button click, make a GET request using the fetch API to the following URL: 
+
+https://jsonplaceholder.typicode.com/users/ 
+
+Pass the user id entered in the textbox as a query string & display the information about the user in a <div> element. 
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function loadfile() {
+            var xhttp = new XMLHttpRequest();
+            var userId = document.getElementById("txtid").value;
+            var url = "https://jsonplaceholder.typicode.com/posts";
+            xhttp.open("get", url, true);
+            xhttp.send();
+
+
+            xhttp.onreadystatechange = function () {
+
+
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = JSON.parse(this.responseText);
+                    console.log(response);
+                    for (var i = 0; i < response.length; i++) {
+                        if (userId == response[i].id) {
+                            var val = document.getElementById("data");
+                            val.innerHTML = "";
+
+                            val.innerHTML = response[i].userId + "," + response[i].id + "," + response[i].title;
+
+                        }
+                    }
+
+
+
+                }
+            };
+
+
+        }
+    </script>
+
+</head>
+
+<input type="text" id="txtid">
+
+<button onclick="loadfile()">GetDetails</button>
+
+<div id="data">
+
+</div>
+
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Create an HTML5 page. Input the user id, name, username and email in different textboxes. On a button click, write a JS function which makes a POST request to the URL mentioned in assignment 3. Check by hitting the same URL to see if the new record was added.
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+
+    function loading() {
+      const _data = {
+        userId: document.getElementById("userid").value,
+        name: document.getElementById("name").value,
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+      }
+      var xtp = new XMLHttpRequest();
+      fetch('https://jsonplaceholder.typicode.com/users', {
+        method: "POST",
+        body: JSON.stringify(_data),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      }).then(response => response.json()).then(json => console.log(json));
+    }
+  </script>
+</head>
+
+<body>
+  <form>
+    <input type="text" id="userid">
+    <input type="text" id="name">
+    <input type="text" id="username">
+    <input type="email" id="email">
+    <input type="button" value="submit" onclick="loading()">
+  </form>
+</body>
+
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+5.Add another button which makes a PUT request to the same URL. In this case, the name, username or email might be modified. Pass the entered id as a query string. Check by hitting the same URL to see if the record was modified or not. 
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <h3>Online JSON PUT</h3>
+    <input type="button" value="REQUEST" onclick="JSONonlinePUT()">
+    <hr>
+
+    <script>
+        var data = {
+            "id": 11,
+            "name": "Hassan Mashmoom",
+            "username": "HassanM",
+            "email": "Hassan@engineer.com",
+            "address": {
+                "street": "Kulas Light",
+                "suite": "Apt. 556",
+                "city": "Gwenborough",
+                "zipcode": "92998-3874",
+                "geo": {
+                    "lat": "-37.3159",
+                    "lng": "81.1496"
+                }
+            },
+            "phone": "1-770-736-8031 x56442",
+            "website": "hildegard.org",
+            "company": {
+                "name": "Romaguera-Crona",
+                "catchPhrase": "Multi-layered client-server neural-net",
+                "bs": "harness real-time e-markets"
+            }
+        }
+
+        function JSONonlinePUT() {
+            var url = "https://jsonplaceholder.typicode.com/users";
+            // PUT request
+            fetch(url + "/?id=" + data.id, {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json()
+                .then(r => console.log("Record UPDATED!")));
+        }
+    </script>
+</body>
+
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+6.Add another button which makes a DELETE request to the same URL. In this case, the request must delete the record with the specified id entered in the textbox. Check by hitting the same URL to see if the record was deleted or not.
+
+<html>
+    <head>
+       
+    </head>
+    <body>
+        
+       <h3>Online JSON DELETE</h3>
+        <input type="button" value="REQUEST" onclick="JSONonlineDELETE()">
+        <hr>
+
+        <script>
+            var data = {
+                "id": 11,
+                "name": "Hassan Mashmoom",
+                "username": "HassanM",
+                "email": "Hassan@engineer.com",
+                "address": {
+                    "street": "Kulas Light",
+                    "suite": "Apt. 556",
+                    "city": "Gwenborough",
+                    "zipcode": "92998-3874",
+                    "geo": {
+                        "lat": "-37.3159",
+                        "lng": "81.1496"
+                    }
+                },
+                "phone": "1-770-736-8031 x56442",
+                "website": "hildegard.org",
+                "company": {
+                    "name": "Romaguera-Crona",
+                    "catchPhrase": "Multi-layered client-server neural-net",
+                    "bs": "harness real-time e-markets"
+                }
+            }
+            
+            function JSONonlineDELETE(){
+                var url = "https://jsonplaceholder.typicode.com/users/?id=";
+                fetch(url+data.id, {
+                    method: "DELETE"
+                }).then((response) => {
+                    response.json().then((res) => {
+                        console.log("Record Deleted: ",res);
+                    });
+                }).catch(err => console.log(err));
+            }
+        </script>
+    </body>
+</html>
