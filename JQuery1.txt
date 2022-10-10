@@ -1,0 +1,77 @@
+1.Create an HTML5 page which contains a textbox. User enters an email id in the textbox. Create a <div> element below the textbox. Create a button titled Show Email. When the button is clicked, the entered email must be displayed inside the <div> element. 
+
+a.Using jQuery, attach a click event handler to the button. 
+
+b.Using jQuery, get the value of the textbox. 
+
+c.Using jQuery, display the email inside the <div> element.
+
+$(document).ready(function() {
+    $('#btn').on('click', function() {
+        var mailval = $("#mailid").val();
+        $('#display').text(mailval);
+    })
+})
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.Create an HTML5 page as follows: 
+
+a.Two empty <div> elements. The id of each must be div1 and div2 respectively. 
+
+b.Two textboxes without ids. 
+
+c.Two textareas without ids. 
+
+d.A button titled Apply Style to TextBoxes. When this button is clicked, draw a red border around each textarea. 
+
+e.A button titled Apply Style to first div . When this button is clicked, write some text only inside the first <div> element. 
+
+f.A button titled Say Hello. When this button is clicked, each textbox and textarea must contain the text HELLO. 
+
+$(document).ready(function() {
+    $(stylebtn).on('click', function() {
+        $('input').css("border-color", "red");
+    })
+    $(stylefirstbtn).on('click', function(){
+        $('#div1').html("Some Text");
+    })
+    $(hellobtn).on('click', function() {
+        $('input').val("HELLO")
+        $('textarea').text("HELLO")
+    })
+})
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Create an HTML5 page which contains a hyperlink. Using jQuery, write code to open Google’s home page in another window when the mouse is hovered over the link. 
+$(document).ready(function() {
+    $('a').on('mouseover', function() {
+        $('a').attr('target', '_blank');
+        window.open("https://www.google.com");
+    })
+})
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.Create a style class and name it error, give its border color as red and background color as yellow. Apply this class to a text box when the focus is moved out of it and if the entered data is more than 10.
+$(document).ready(function(){
+    $('#textbox').on('focusout', function() {
+        let value = $('#textbox').val()
+        if(value > 10)
+        {
+            $('#textbox').addClass("error");
+        }
+    })
+})
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+5.Create an HTML5 page. The page contains a textbox and a button titled Login. Disable the button initially using jQuery. The moment something is typed in the textbox, enable the button. Disable it again if the textbox is empty. 
+$(document).ready(function() {
+    $("#btn").css('display', 'none');
+    $("#textbox").on('keyup', function() {
+        let valcheck = $('#textbox').val();
+        if(valcheck == "")
+        {
+            $("#btn").css('display', 'none');
+        }
+        else
+        {
+            $("#btn").css('display', 'block');
+        }
+    })
+})
+
