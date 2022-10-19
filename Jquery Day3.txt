@@ -1,0 +1,206 @@
+1.Hit the following URL & observe the output: 
+
+https://jsonplaceholder.typicode.com/todos 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.Create an HTML5 page which makes a jQuery AJAX GET request to the above-mentioned URL & display all titles inside a dropdown list. 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <p style="margin-top: 0;"><b>Fetching data using Jquery AJAX Request</b></p>
+        <select name="todo" id="todo"></select>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"https://jsonplaceholder.typicode.com/todos",
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    var initialOption = `<option value"" selected disabled>Expand to view data</option>`
+                    var result = ``
+                    data.forEach(data => {
+                        result += `<option>${data.title}</option>`
+                    })
+                    $('#todo').html(initialOption + result)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Create an HTML5 page which makes a jQuery AJAX GET request to the above-mentioned URL. Display the title of all completed todos in a listbox and all non-completed todos as a numeric bulleted list.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+        .container{
+            border: 2px solid black;
+            background-color: bisque;
+            width: 40%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <h3 style="margin-top: 0;"><b>Fetching data using AJAX GET request</b></h3>
+       <p><b>Completed ToDos</b></p>
+       <select name="todo" id="completed"></select>
+
+       <p><b>Not Completed ToDos</b></p>
+       <ol style="font-size: small;" id="notCompleted"></ol>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"https://jsonplaceholder.typicode.com/todos",
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    var initialOption = `<option value"" selected disabled>Expand to view data</option>`
+                    var resultOfCompleted = ``
+                    var resultOfNotCompleted = ``
+
+                    data.forEach(data => {
+                        if(data.completed == true){
+                            resultOfCompleted += `<option>${data.title}</option>`
+                        }
+                        else{
+                            resultOfNotCompleted += ` <li>${data.title}</li>`
+                        }
+                    })
+                    $('#completed').html(initialOption + resultOfCompleted)
+                    $('#notCompleted').html(resultOfNotCompleted)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.Create an HTML5 page which inputs the following details: 
+
+ 
+
+a.     userid                à must be a textbox 
+
+b.     title                     à must be a textbox 
+
+c.      completed        à must be a checkbox 
+
+Make a jQuery POST request to the above-mentioned URL & check if the record as been added. 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(244, 198, 97);
+        }
+        .container{
+            border: 2px solid black;
+            background-color: rgb(160, 169, 214);
+            width: 40%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3 style="margin-top: 0;"><b>Posting data using Jqyeery AJAX POST request</b></h3>
+        <label for="userid">User ID:</label><input type="text" id="userid"><br><br>
+        <label for="title">Title:</label><input type="text" id="title"><br><br>
+        <label for="completed">Completed?</label><input type="checkbox" id="completed"><br><br>
+        <button>Post details</button>
+     </div><br>
+ 
+     <div class="container" style="display: none;">
+     <div id="detils"></div>
+     </div>
+     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+         $(document).ready(function(){
+            $("button").click(function(){
+                $.ajax({
+                    url:"https://jsonplaceholder.typicode.com/todos",
+                    type:'POST',
+                    dataType:'json',
+                    data: {
+                        Userid : $("#userid").val(),
+                        title : $("#title").val(),
+                        completed : $("#completed").is(':checked')
+                    },
+                    success:function(data){
+                        console.log(data);
+                        var result = `<b>User Added Succesfully</b> <br><br>
+                                    The details are:<br>
+                                    Id: ${data.id}<br>
+                                    UserId: ${data.Userid}<br>
+                                    Title:${data.title}<br>
+                                    Completed: ${data.completed}`
+
+                        $('#details').html(result)
+                        $('.container').css('display','block')
+                    }
+                })
+             })
+        })
+    </script>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5. Create an HTML5 page. Create a <div> element with the id mydiv. Using the jQuery load() function, load the HTML5 page created in assignment 3 inside the <div> element.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="margin-top: 20px;">
+    <button>Click me to load data</button><br><br>
+    <div id="mydiv"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('button').on('click',function (){
+                $('#mydiv').load('day3_3.html');
+            })
+        })
+    </script>
+    
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
